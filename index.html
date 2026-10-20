@@ -191,7 +191,15 @@ form .btn{justify-self:start;grid-column:1/-1}
 .form-msg{grid-column:1/-1;font-weight:500}
 .form-msg[data-state="ok"]{color:#2f5d0a}
 .form-msg[data-state="err"]{color:#9a3a10}
-.copy-email{display:inline-flex;align-items:center;gap:.5em;margin-top:6px;font:500 .95rem/1 var(--body);background:none;border:0;padding:0;color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.copy-wrap{position:relative;display:inline-block;vertical-align:middle}
+.copy-email{display:inline-grid;place-items:center;width:30px;height:30px;margin-left:4px;background:var(--white);border:2px solid var(--ink);border-radius:8px;padding:0;color:var(--ink);cursor:pointer;transition:transform .15s ease,background-color .15s ease}
+.copy-email svg{width:15px;height:15px;grid-area:1/1}
+.copy-email .i-done{opacity:0}
+.copy-email:hover{background:var(--pink);transform:translateY(-1px)}
+.copy-email.copied .i-copy{opacity:0}.copy-email.copied .i-done{opacity:1}
+.copy-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:var(--paper);font:500 .78rem/1 var(--body);padding:.45em .65em;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .15s ease}
+.copy-tip:empty{display:none}
+.copy-email.copied + .copy-tip,.copy-email.fallback + .copy-tip{opacity:1}
 @media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
 @media (max-width:520px){form{grid-template-columns:1fr}}
 
@@ -437,8 +445,11 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
       <div>
         <h2 id="contact-title">Your event deserves stickers.</h2>
         <p class="lede">Tell us the date and what you're planning.<br>We'll reply with availability.</p>
-        <p style="margin-top:20px"><strong>Email:</strong> <span id="email-text">sarahweddingdesign@gmail.com</span><br>
-          <button type="button" class="copy-email" id="copy-email">Copy email address</button></p>
+        <p style="margin-top:20px"><strong>Email:</strong> <span id="email-text">sarahweddingdesign@gmail.com</span>
+          <span class="copy-wrap"><button type="button" class="copy-email" id="copy-email" aria-label="Copy email address" title="Copy email address">
+            <svg class="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="i-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </button><span class="copy-tip" id="copy-tip" role="status"></span></span></p>
         <div class="contact-art" aria-hidden="true">
           <img src="assets/char-10.webp" alt="" width="360" height="420" loading="lazy">
           <img src="assets/char-8.webp" alt="" width="240" height="460" loading="lazy">
@@ -507,11 +518,13 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
 
   var copyBtn = document.getElementById("copy-email");
   copyBtn.addEventListener("click", function(){
-    function done(){ copyBtn.textContent = "Copied"; setTimeout(function(){ copyBtn.textContent = "Copy email address"; }, 2000); }
+    var tip = document.getElementById("copy-tip");
+    function reset(){ copyBtn.classList.remove("copied", "fallback"); tip.textContent = ""; }
+    function done(){ copyBtn.classList.add("copied"); tip.textContent = "Copied"; setTimeout(reset, 1800); }
     function fallback(){
       var r = document.createRange(); r.selectNodeContents(document.getElementById("email-text"));
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      copyBtn.textContent = "Selected. Press Ctrl+C or Cmd+C to copy";
+      copyBtn.classList.add("fallback"); tip.textContent = "Selected. Press Cmd+C to copy"; setTimeout(reset, 3500);
     }
     try { navigator.clipboard.writeText(EMAIL).then(done, fallback); } catch(e){ fallback(); }
   });
