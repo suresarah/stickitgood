@@ -60,6 +60,9 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1
 .logo{font:700 1.5rem/1 var(--display);text-decoration:none;display:flex;align-items:center;gap:.4em}
 /* the mini sticker machine from the favicon, without its tile: dark version on the cream header, light version in the dark footer */
 .logo .mark{width:auto;height:1.3em;flex:none;display:block}
+/* Sarah's stacked "stick it good" lettering in the header */
+.logo .wordmark{width:auto;height:60px;flex:none;display:block;margin-block:-6px}
+@media (max-width:560px){.logo .wordmark{height:48px;margin-block:-4px}}
 nav{display:flex;gap:clamp(12px,3vw,32px);align-items:center;font-weight:500}
 nav a{text-decoration:none}
 nav a:not(.btn):hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
@@ -256,7 +259,7 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
 
 <header>
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Stick it Good, back to top"><img class="mark" src="assets/mark-light.svg" alt="" width="24" height="30">Stick it Good</a>
+    <a class="logo" href="#top" aria-label="Stick it Good, back to top"><img class="mark" src="assets/mark-light.svg" alt="" width="24" height="30"><img class="wordmark" src="assets/logo-wordmark.png" alt="" width="212" height="240"></a>
     <nav aria-label="Main">
       <a href="#how">How it works</a>
       <a href="#rates">Rates</a>
