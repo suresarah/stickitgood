@@ -179,7 +179,8 @@ nav .btn{padding:.7em 1.1em;font-size:.92rem;box-shadow:3px 3px 0 var(--ink)}
 .contact h2{font-size:clamp(2.8rem,6.4vw,5.4rem)}
 .contact .lede{margin-top:20px;max-width:36ch;font-size:1.15rem}
 .contact-art{display:flex;gap:8px;margin-top:32px;align-items:end}
-.contact-art img{width:46%;max-width:200px}
+/* same height for both stickers (one drawing is square, the other tall), so the figures match */
+.contact-art img{height:clamp(170px, 24vw, 250px);width:auto;max-width:48%;object-fit:contain}
 .contact-art img:first-child{transform:rotate(-4deg)}
 .contact-art img:last-child{transform:rotate(5deg)}
 form{padding:clamp(22px,3vw,34px);display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -188,6 +189,9 @@ form{padding:clamp(22px,3vw,34px);display:grid;grid-template-columns:1fr 1fr;gap
 label{font:700 .78rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase}
 input,select,textarea{font:inherit;color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:.75em .85em;width:100%}
 textarea{min-height:120px;resize:vertical}
+/* date inputs have a built-in minimum width (Safari especially) that can push them past their column */
+input[type="date"]{-webkit-appearance:none;appearance:none;display:block;min-width:0;max-width:100%;min-height:calc(1.55em + 1.5em + 4px)}
+input[type="date"]::-webkit-date-and-time-value{text-align:left}
 input:focus,select:focus,textarea:focus{outline:3px solid var(--pink);outline-offset:1px}
 form .btn{justify-self:start;grid-column:1/-1}
 .form-msg{grid-column:1/-1;font-weight:500}
