@@ -54,8 +54,8 @@ p{margin:0}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--paper);border-bottom:2px solid var(--ink)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
 .logo{font:700 1.5rem/1 var(--display);text-decoration:none;display:flex;align-items:center;gap:.4em}
-/* the mini sticker machine from the favicon, a touch taller than the wordmark's capitals */
-.logo .mark{width:1.25em;height:1.25em;flex:none;display:block}
+/* the mini sticker machine from the favicon, without its tile: dark version on the cream header, light version in the dark footer */
+.logo .mark{width:auto;height:1.3em;flex:none;display:block}
 nav{display:flex;gap:clamp(12px,3vw,32px);align-items:center;font-weight:500}
 nav a{text-decoration:none}
 nav a:not(.btn):hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
@@ -208,7 +208,7 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
 
 <header>
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Stick it Good, back to top"><img class="mark" src="favicon.svg" alt="" width="30" height="30">Stick it Good</a>
+    <a class="logo" href="#top" aria-label="Stick it Good, back to top"><img class="mark" src="assets/mark-light.svg" alt="" width="24" height="30">Stick it Good</a>
     <nav aria-label="Main">
       <a href="#how">How it works</a>
       <a href="#rates">Rates</a>
@@ -439,7 +439,7 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
 
 <footer>
   <div class="wrap">
-    <span class="logo"><img class="mark" src="favicon.svg" alt="" width="26" height="26">Stick it Good</span>
+    <span class="logo"><img class="mark" src="assets/mark-dark.svg" alt="" width="21" height="26">Stick it Good</span>
     <span>sarahweddingdesign@gmail.com · Denver, CO</span>
     <nav aria-label="Elsewhere"><a href="https://sarahweddingdesign.com">Sarah Wedding Design</a><a href="https://www.instagram.com/sarah.wedding.design" target="_blank" rel="noopener">Instagram</a></nav>
   </div>
