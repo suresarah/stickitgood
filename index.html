@@ -444,8 +444,8 @@ footer nav a{text-decoration:underline;text-underline-offset:3px}
 <script>
 (function(){
   var EMAIL = "sarahweddingdesign@gmail.com";
-  // FormSubmit sends the first submission as an activation email to this address.
-  var FORM_ENDPOINT = "https://formsubmit.co/ajax/" + EMAIL;
+  // FormSubmit's private code for this address (activated for http and https stickitgood.com), so the form doesn't expose the email to scrapers.
+  var FORM_ENDPOINT = "https://formsubmit.co/ajax/bace326d015f93cb914c3220b6106aae";
 
   var copyBtn = document.getElementById("copy-email");
   copyBtn.addEventListener("click", function(){
